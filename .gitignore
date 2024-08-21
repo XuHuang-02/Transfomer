@@ -1,0 +1,62 @@
+##ignore this file##
+/target/
+/.idea/
+/.settings/
+/.vscode/
+/bin/
+
+.classpath
+.project
+.settings
+.idea
+ ##filter databfile、sln file##
+*.mdb
+*.ldb
+*.sln
+##class file##
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+# compression file
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+*.via
+*.tmp
+*.err
+*.log
+*.iml
+# OS generated files #
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+.factorypath
+/.mvn/
+/mvnw.cmd
+/mvnw
+
+/ViT/best_model.pth
+/ViT/MNIST/
+/swin_transformer/.ipynb_checkpoints/
+/swin_transformer/data/
+/swin_transformer/runs/
+/swin_transformer/weights/
+/swin_transformer/swin_tiny_patch4_window7_224.pth
+# swin_MNIST #
+/swin_MNIST/.ipynb_checkpoints/
+/swin_MNIST/data/
+/swin_MNIST/runs/
+/swin_MNIST/weights/

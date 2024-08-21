@@ -1,0 +1,28 @@
+C:\Users\Clearlove\.conda\envs\pytorch\python.exe C:\Code\Python_Code\swin_transformer\train.py
+3670 images were found in the dataset.
+2939 images for training.
+731 images for validation.
+Using 8 dataloader workers every process
+_IncompatibleKeys(missing_keys=['head.weight', 'head.bias'], unexpected_keys=['layers.0.blocks.1.attn_mask', 'layers.1.blocks.1.attn_mask', 'layers.2.blocks.1.attn_mask', 'layers.2.blocks.3.attn_mask', 'layers.2.blocks.5.attn_mask'])
+[train epoch 0] loss: 0.435, acc: 0.848: 100%|██████████| 368/368 [00:53<00:00,  6.85it/s]
+[valid epoch 0] loss: 0.186, acc: 0.933: 100%|██████████| 92/92 [00:22<00:00,  4.03it/s]
+[train epoch 1] loss: 0.262, acc: 0.906: 100%|██████████| 368/368 [00:55<00:00,  6.65it/s]
+[valid epoch 1] loss: 0.203, acc: 0.934: 100%|██████████| 92/92 [00:22<00:00,  4.01it/s]
+[train epoch 2] loss: 0.219, acc: 0.919: 100%|██████████| 368/368 [00:55<00:00,  6.63it/s]
+[valid epoch 2] loss: 0.203, acc: 0.940: 100%|██████████| 92/92 [00:22<00:00,  4.04it/s]
+[train epoch 3] loss: 0.218, acc: 0.920: 100%|██████████| 368/368 [00:51<00:00,  7.12it/s]
+[valid epoch 3] loss: 0.182, acc: 0.941: 100%|██████████| 92/92 [00:22<00:00,  4.14it/s]
+[train epoch 4] loss: 0.173, acc: 0.944: 100%|██████████| 368/368 [00:58<00:00,  6.31it/s]
+[valid epoch 4] loss: 0.182, acc: 0.938: 100%|██████████| 92/92 [00:26<00:00,  3.48it/s]
+[train epoch 5] loss: 0.176, acc: 0.937: 100%|██████████| 368/368 [00:49<00:00,  7.48it/s]
+[valid epoch 5] loss: 0.179, acc: 0.944: 100%|██████████| 92/92 [00:20<00:00,  4.46it/s]
+[train epoch 6] loss: 0.160, acc: 0.948: 100%|██████████| 368/368 [00:48<00:00,  7.54it/s]
+[valid epoch 6] loss: 0.179, acc: 0.936: 100%|██████████| 92/92 [00:20<00:00,  4.50it/s]
+[train epoch 7] loss: 0.172, acc: 0.939: 100%|██████████| 368/368 [00:48<00:00,  7.53it/s]
+[valid epoch 7] loss: 0.177, acc: 0.944: 100%|██████████| 92/92 [00:20<00:00,  4.47it/s]
+[train epoch 8] loss: 0.156, acc: 0.948: 100%|██████████| 368/368 [00:48<00:00,  7.53it/s]
+[valid epoch 8] loss: 0.147, acc: 0.952: 100%|██████████| 92/92 [00:21<00:00,  4.30it/s]
+[train epoch 9] loss: 0.148, acc: 0.952: 100%|██████████| 368/368 [00:49<00:00,  7.41it/s]
+[valid epoch 9] loss: 0.178, acc: 0.951: 100%|██████████| 92/92 [00:23<00:00,  3.85it/s]
+
+进程已结束，退出代码为 0
