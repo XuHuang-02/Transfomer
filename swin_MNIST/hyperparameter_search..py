@@ -5,7 +5,7 @@ import torch.optim as optim
 import optuna
 from torch.utils.data import DataLoader
 from torchvision import transforms
-
+import matplotlib.pyplot as plt
 from my_dataset import MyDataSet
 from model import swin_mnist as create_model
 from utils import read_split_data, train_one_epoch, evaluate
@@ -16,8 +16,17 @@ def objective(trial, args, train_loader, val_loader, device):
     patch_size = trial.suggest_int('patch_size', 1, 4)
     window_size = trial.suggest_int('window_size', 2, 4)
     embed_dim = trial.suggest_categorical('embed_dim', [48, 96, 192])
-    depths_str = trial.suggest_categorical('depths', [(2, 2, 6, 2), (2, 2, 18, 2)])
-    depths = eval(depths_str)
+    # 使用字符串标识来选择 depths
+    depths_str = trial.suggest_categorical('depths', ['depth1', 'depth2', 'depth3'])
+
+    # 根据字符串选择对应的元组
+    depths_map = {
+        'depth1': (2, 2, 6, 2),
+        'depth2': (2, 2, 18, 2),
+        'depth3': (2, 2, 18, 6)
+    }
+    depths = depths_map[depths_str]
+
     # 创建模型
     model = create_model(num_classes=args.num_classes,
                          patch_size=patch_size,
@@ -41,14 +50,15 @@ def objective(trial, args, train_loader, val_loader, device):
                                      device=device,
                                      epoch=epoch)
 
-        # 向 Optuna 报告结果
-        trial.report(val_loss, epoch)
+        # 向 Optuna 报告当前的验证准确率
+        trial.report(val_acc, epoch)
 
-        # 如果在训练过程中验证集上的损失没有提升，可以提前终止
+        # 如果验证集准确率没有提升，可以提前终止
         if trial.should_prune():
             raise optuna.exceptions.TrialPruned()
 
-    return val_loss  # 也可以返回 `-val_acc` 来最大化准确率
+    # 返回验证准确率，Optuna 将最大化该值
+    return val_acc
 
 
 def main(args):
@@ -99,18 +109,41 @@ def main(args):
                             collate_fn=val_dataset.collate_fn)
 
     # 创建 Optuna study
-    study = optuna.create_study(direction="minimize")  # 可以是 "maximize" 如果是优化准确率
+    study = optuna.create_study(direction="maximize")  # 通过最大化准确率来优化
     study.optimize(lambda trial: objective(trial, args, train_loader, val_loader, device),
                    n_trials=50)
+
+    # 绘制并保存 Optuna 结果图
+    plot_optimization_history(study, "optimization_history.png")
+    plot_parallel_coordinate(study, "parallel_coordinate.png")
+    plot_param_importances(study, "param_importances.png")
 
     # 输出最优超参数
     print(f"Best trial: {study.best_trial.params}")
 
 
+def plot_optimization_history(study, filename):
+    optuna.visualization.matplotlib.plot_optimization_history(study)
+    plt.savefig(filename)
+    plt.close()
+
+
+def plot_parallel_coordinate(study, filename):
+    optuna.visualization.matplotlib.plot_parallel_coordinate(study)
+    plt.savefig(filename)
+    plt.close()
+
+
+def plot_param_importances(study, filename):
+    optuna.visualization.matplotlib.plot_param_importances(study)
+    plt.savefig(filename)
+    plt.close()
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--num_classes', type=int, default=10)
-    parser.add_argument('--epochs', type=int, default=5)
+    parser.add_argument('--epochs', type=int, default=10)
     parser.add_argument('--batch-size', type=int, default=64)
     parser.add_argument('--lr', type=float, default=0.001)
     parser.add_argument('--data-path', type=str, default="./data/MNIST")
