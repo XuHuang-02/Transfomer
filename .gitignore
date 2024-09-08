@@ -60,3 +60,5 @@ Thumbs.db
 /swin_MNIST/data/
 /swin_MNIST/runs/
 /swin_MNIST/weights/
+/Graph/.ipynb_checkpoints/
+/ViT/.ipynb_checkpoints/
